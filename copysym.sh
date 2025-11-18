@@ -6,12 +6,13 @@
 COLOR=$1
 ICON_PACK=~/.local/share/icons/copycat
 
-ABSOLUTE_FLAVOR="$ICON_PACK/reserved/folder-flavors/$COLOR"
-#RELATIVE_FLAVOR="../../reserved/folder-flavors/$COLOR" # só pro symlink ficar mais flexível, em vez de apontar pra um caminho absoluto
+FLAVOR="$ICON_PACK/reserved/folder-flavors/$COLOR"
 PLACES="$ICON_PACK/places/scalable"
 
+cd "$PLACES"
+
 if [ ! -e "$FLAVOR" ]; then
-    echo Flavor does not exists
+    echo Flavor does not exists: "$FLAVOR"
     exit 1 # sai com código de erro
 fi
 
@@ -26,7 +27,7 @@ for icon in "$PLACES"/*.svg; do
         # substituir o original por um symlink se for o mesmo nome, indicando que é válido
         # se um arquivo não for válido, significa que ele não tem uma variação disponível
         if [[ "$s_name" == "$i_name" ]]; then
-            ln -sf "$substitute" "$icon"
+            ln -sf "../../reserved/folder-flavors/$COLOR/$s_name" "$icon"
             echo Changed "$s_name" to "$i_name"
         else
             echo Skipping "$s_name" since it doesn\'t have the same name as "$i_name"
