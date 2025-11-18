@@ -6,8 +6,7 @@
 COLOR=$1
 ICON_PACK=~/.local/share/icons/copycat
 
-ABSOLUTE_FLAVOR="$ICON_PACK/reserved/folder-flavors/$COLOR"
-#RELATIVE_FLAVOR="../../reserved/folder-flavors/$COLOR" # só pro symlink ficar mais flexível, em vez de apontar pra um caminho absoluto
+FLAVOR="$ICON_PACK/reserved/folder-flavors/$COLOR"
 PLACES="$ICON_PACK/places/scalable"
 
 if [ ! -e "$FLAVOR" ]; then
